@@ -3,12 +3,16 @@
 #Site: http://www.spinola.net.br 
 ### Script de integracao com o Telegram ### 
 #set -x
-#SCRIPT_PATH=`pwd`;
 ENTER="
 ";
 USERID="$1";
-#KEY=$(cat $SCRIPT_PATH/botinfo.txt);
-KEY="CHAVE_DO_MEU_BOT";
+
+ARQUIVO="/usr/local/share/zabbix/alertscripts/botinfo.txt";
+if [ -f "$ARQUIVO" ]; then
+  KEY=$(cat $ARQUIVO);
+else
+  KEY="CHAVE_DO_MEU_BOT";
+fi
 
 TIMEOUT="5";
 TEXT=$(echo -e "*$2* $ENTER$3" |  sed 's/PROBLEM/INCIDENTE/g');
